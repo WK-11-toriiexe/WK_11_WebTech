@@ -9,7 +9,7 @@ function App() {
   const app = {
     name: "WebTech",
     version: "1.0",
-    author: "Twoje imię i nazwisko",
+    author: "Wiktoria Kędzior",
     technologiesCount: 3
   };
 
@@ -72,7 +72,7 @@ function App() {
         <p>Nauczyciel: {course.teacher}</p>
         <p>Godzin: {course.hours}</p>
         <p>Czy ukończono kurs: {course.completed}</p>
-        
+        <p>Istnieje możliwość zapisania do części drugiej kursu, trwającej {course.hours + 10} godzin. Kontynuować?</p>
       </section>
       
 
