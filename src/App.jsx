@@ -1,83 +1,33 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import Header from "./components/Header.jsx";
+import Technology from "./components/Technology.jsx";
+import Footer from "./components/Footer.jsx";
+import Student from "./components/Student.jsx";
+import InfoBox from "./components/InfoBox.jsx";
+import Navigation from "./components/Navigation.jsx";
 
 function App() {
-
-  const app = {
-    name: "WebTech",
-    version: "1.0",
-    author: "Wiktoria Kędzior",
-    technologiesCount: 3
-  };
-
-  const technology = {
-    name: "React",
-    category: "Frontend",
-    hours: 30,
-    active: true
-  };
-
-  const student = {
-    name: "Wiktoria",
-    surname: "Kędzior",
-    className: "4P",
-    specialization: "technik programista"
-  };
-
-  const course = {
-    name: "Kurs HTML i CSS",
-    teacher: "mgr inż Ludwik de Laveaux",
-    hours: 26,
-    completed: true
-  };
-
   return (
-    <div>
+    <>
+      <Header />
 
-      <h1>{app.name}</h1>
+      <Navigation />
 
-      <p>Wersja: {app.version}</p>
+      <main>
 
-      <p>Autor: {app.author}</p>
+        <Student />
 
-      <p>
-        Liczba technologii: {app.technologiesCount}
-      </p>
+        <InfoBox />
 
+        <Technology />
 
-      <br/>
+        <Technology />
 
-      <p>{technology.name}</p>
+        <Technology />
 
-      <p>Kategoria: {technology.category}</p>
+      </main>
 
-      <p>Liczba godzin: {technology.hours}</p>
-
-
-      <br/>
-
-      <p>Uczeń: {student.name} {student.surname}</p>
-
-      <p>Klasa: {technology.className}</p>
-
-      <p>Kierunek: {technology.specialization}</p>
-
-      <br/>
-
-      <section>
-        <h2>Kurs: {course.name}</h2>
-        <p>Nauczyciel: {course.teacher}</p>
-        <p>Godzin: {course.hours}</p>
-        <p>Czy ukończono kurs: {course.completed}</p>
-        <p>Istnieje możliwość zapisania do części drugiej kursu, trwającej {course.hours + 10} godzin. Kontynuować?</p>
-      </section>
-      
-
-    </div>
-    
+      <Footer />
+    </>
   );
 }
 
