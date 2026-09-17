@@ -4,6 +4,8 @@ import Footer from "./components/Footer.jsx";
 import Student from "./components/Student.jsx";
 import InfoBox from "./components/InfoBox.jsx";
 import Navigation from "./components/Navigation.jsx";
+import CourseCard from "./components/CourseCard.jsx";
+import Tablice from "./components/Tablice.jsx";
 
 function App() {
   return (
@@ -17,6 +19,10 @@ function App() {
         <Student />
 
         <InfoBox />
+
+        <CourseCard />
+
+        <Tablice />
 
         <Technology />
 
