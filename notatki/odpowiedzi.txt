@@ -8,7 +8,7 @@ Props to obiekt zawierający wszystkie dane (właściwości), które zostały pr
 To odczyt (pobranie) wartości właściwości name z obiektu props.
 
 4. Skąd komponent otrzymuje dane?
-Dane pochodzą z miejsca, w którym komponent jest wywoływany (renderowany) — czyli z komponentu nadrzędnego, np. App.jsx, gdzie przy wywołaniu <Technology name="React" /> przekazujemy wartości do odpowiednich właściwości.
+Dane pochodzą z miejsca, w którym komponent jest wywoływany (renderowany) - czyli z komponentu nadrzędnego, np. App.jsx, gdzie przy wywołaniu <Technology name="React" /> przekazujemy wartości do odpowiednich właściwości.
 
 5. Czy jeden komponent może otrzymać różne props?
 Tak. Ten sam komponent może być użyty wielokrotnie z różnymi wartościami props, dzięki czemu kod komponentu piszemy raz, a wykorzystujemy go wielokrotnie z różnymi danymi.
