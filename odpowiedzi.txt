@@ -1,0 +1,35 @@
+1. Do czego służą props?
+Props służą do przekazywania danych z komponentu nadrzędnego (rodzica) do komponentu podrzędnego (dziecka). Dzięki temu jeden komponent może być użyty wielokrotnie, ale za każdym razem wyświetlać inne dane.
+
+2. Czym jest obiekt props?
+Props to obiekt zawierający wszystkie dane (właściwości), które zostały przekazane do komponentu podczas jego wywołania. Props jest zwykłym obiektem JavaScript, więc dostęp do jego pól wygląda dokładnie tak samo jak dostęp do pól dowolnego innego obiektu (np. student.name).
+
+3. Co oznacza props.name?
+To odczyt (pobranie) wartości właściwości name z obiektu props.
+
+4. Skąd komponent otrzymuje dane?
+Dane pochodzą z miejsca, w którym komponent jest wywoływany (renderowany) — czyli z komponentu nadrzędnego, np. App.jsx, gdzie przy wywołaniu <Technology name="React" /> przekazujemy wartości do odpowiednich właściwości.
+
+5. Czy jeden komponent może otrzymać różne props?
+Tak. Ten sam komponent może być użyty wielokrotnie z różnymi wartościami props, dzięki czemu kod komponentu piszemy raz, a wykorzystujemy go wielokrotnie z różnymi danymi.
+
+6. Jak przekazujemy tekst?
+Tekst przekazujemy w cudzysłowie, np. name="React".
+
+7. Jak przekazujemy liczbę?
+Liczbę przekazujemy w klamrach {} jako wyrażenie JavaScript, np. hours={30}.
+
+8. Dlaczego używamy {30}, a nie "30", jeśli chcemy przekazać liczbę?
+Zapis "30" przekazałby ciąg znaków (string), a nie liczbę. Używając {30}, wchodzimy w tryb JavaScript wewnątrz JSX i przekazujemy prawdziwą wartość liczbową (number), co jest ważne np. gdy chcemy później wykonywać na niej obliczenia matematyczne.
+
+9. Czy komponent powinien modyfikować props?
+Nie. Props są tylko do odczytu (read-only). Komponent powinien wyłącznie korzystać z danych otrzymanych przez props, a nie zmieniać ich bezpośrednio. Jeśli w przyszłości będziemy chcieli, żeby komponent miał dane, które mogą się zmieniać, użyjemy do tego state i useState.
+
+10. Do czego służy destrukturyzacja?
+Destrukturyzacja pozwala skrócić zapis odwołań do właściwości obiektu props. Zamiast pisać za każdym razem props.name, props.category itd., możemy wyciągnąć potrzebne właściwości bezpośrednio w parametrach funkcji komponentu, np. function Technology({ name, category, hours }).
+
+11. Czy jako prop możemy przekazać obiekt?
+Tak, np. specification={specification}, a dane odczytujemy przez props.specification.language.
+
+12. Czy jako prop możemy przekazać tablicę?
+Tak, np. features={features}, a elementy odczytujemy np. przez props.features[0].
