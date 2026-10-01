@@ -2,6 +2,7 @@ import Header from "./components/Header";
 import Technology from "./components/Technology";
 import Footer from "./components/Footer";
 import Student from "./components/Student";
+import Book from "./components/Book";
 
 function App() {
 
@@ -92,8 +93,13 @@ function App() {
       );
   */
   }
-  
 
+  const books = [
+  { id: 1, title: "Wiedźmin", author: "Andrzej Sapkowski" },
+  { id: 2, title: "Hobbit", author: "J.R.R. Tolkien" },
+  { id: 3, title: "Lalka", author: "Bolesław Prus" }
+  ];
+  
   return (
     <>
       <Header />
@@ -122,6 +128,30 @@ function App() {
         <br />
 
         <Student students = {students}/>
+
+        <br />
+        <br />
+        <br />
+
+        <h1> Książki </h1>
+        <h2> Wersja 1. - Niejawnie </h2>
+        {
+          books.map((b) => (
+          <Book
+            key={b.id}
+            title={b.title}
+            author={b.author}
+          />
+        ))}
+        <h2> Wersja 2. - Jawnie </h2>
+        {
+          books.map((b) => {
+          return <Book
+            key={b.id}
+            title={b.title}
+            author={b.author}
+          />
+        })}
       </main>
 
       <hr />
