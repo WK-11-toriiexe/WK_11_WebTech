@@ -1,62 +1,29 @@
-1. Czym jest tablica obiektów?
-Jest to struktura danych w JavaScript (tablica), w której poszczególnymi elementami są obiekty. Pozwala ona na przechowywanie złożonych, powiązanych ze sobą danych w uporządkowanej formie (np. listy produktów, użytkowników czy technologii), gdzie każdy element (obiekt) posiada własny zestaw właściwości.
+1. Czym jest zdarzenie?
+Zdarzenie to działanie użytkownika, na które reaguje aplikacja internetowa, np. kliknięcie, zmiana wartości pola, wysłanie formularza, naciśnięcie klawisza czy ruch myszy. W React obsługujemy je za pomocą odpowiednich właściwości JSX, takich jak onClick, onChange, onSubmit, onKeyDown czy onMouseEnter.
 
+2. Do czego służy onClick?
+onClick to właściwość JSX służąca do obsługi kliknięcia. Przypisujemy do niej funkcję, która ma zostać wykonana po kliknięciu elementu, np. przycisku: <button onClick={showMessage}>Kliknij</button>.
 
-2. Co oznacza technologies[0]?
-Oznacza odwołanie się do pierwszego elementu (o indeksie 0) znajdującego się w tablicy technologies. W przypadku tablicy obiektów wyrażenie to zwraca cały pierwszy obiekt.
+3. Co oznacza onClick={showMessage}?
+Oznacza przekazanie funkcji showMessage do zdarzenia kliknięcia. Funkcja nie wykona się od razu, lecz dopiero po kliknięciu, kiedy React sam ją wywoła.
 
+4. Czym różni się showMessage od showMessage()?
+showMessage to sama funkcja (odwołanie do niej), którą można przekazać do wykonania później. showMessage() to wywołanie funkcji, które wykonuje ją natychmiast. Zapis onClick={showMessage()} jest niepoprawny, bo funkcja uruchomi się podczas renderowania komponentu, a nie po kliknięciu. Dla obsługi zdarzenia najczęściej przekazujemy samą funkcję: onClick={showMessage}.
 
-3. Co oznacza technologies[0].name?
-Oznacza pobranie wartości właściwości name z pierwszego obiektu znajdującego się pod indeksem 0 w tablicy technologies.
+5. Dlaczego przy przekazywaniu argumentu często stosujemy funkcję strzałkową?
+Zapis onClick={showTechnology("React")} wywołałby funkcję natychmiast, podczas renderowania. Funkcja strzałkowa () => showTechnology("React") tworzy nową funkcję, która dopiero po kliknięciu wywoła showTechnology z podanym argumentem.
 
+6. Co wykona onClick={() => showTechnology("React")}?
+Po kliknięciu przycisku wykona się funkcja strzałkowa, a ona wywoła showTechnology z argumentem "React". Przy funkcji console.log("Wybrano: " + name) w konsoli pojawi się: Wybrano: React. Przed kliknięciem nic się nie wykona.
 
-4. Do czego służy map()?
-Jest to wbudowana metoda tablic w JavaScript, która służy do przechodzenia (iterowania) przez wszystkie elementy tablicy i tworzenia na ich podstawie nowej tablicy z przetworzonymi elementami.
+7. Czy funkcję można przekazać przez props?
+Tak. Funkcja jest zwykłą wartością w JavaScript, więc można ją przekazać do komponentu podrzędnego jak każdy inny props, np. <Technology name="React" onSelect={selectTechnology} />. W komponencie podrzędnym odbieramy ją w parametrach, np. function Technology({ name, onSelect }), i wywołujemy po kliknięciu: onClick={() => onSelect(name)}.
 
+8. Gdzie może znajdować się funkcja obsługująca zdarzenie?
+Może być zdefiniowana w tym samym komponencie, w którym znajduje się przycisk (np. showTechnology w komponencie Technology). Może też znajdować się w komponencie nadrzędnym (np. selectTechnology w App) i zostać przekazana do komponentu podrzędnego przez props. Wtedy przycisk w komponencie podrzędnym uruchamia funkcję znajdującą się w komponencie nadrzędnym.
 
-5. Ile razy wykona się map() dla tablicy zawierającej pięć elementów?
-Funkcja przekazana do metody map() wykona się dokładnie 5 razy - po jednym razie dla każdego elementu tablicy.
+9. Czy kliknięcie przycisku powoduje ponowne uruchomienie całej strony?
+Nie. React obsługuje zdarzenie bez przeładowania strony, wykonywana jest tylko przypisana funkcja. Jest to cecha aplikacji typu SPA.
 
-
-6. Co oznacza parametr technology w funkcji przekazanej do map()?
-Parametr ten reprezentuje aktualnie przetwarzany element tablicy w danym kroku pętli (iteracji). Przykładowo, w pierwszym kroku będzie to pierwszy obiekt z tablicy, w drugim - drugi obiekt itd.
-
-
-7. Jaka jest różnica między => (...) a => {...}?
-Zapis => (...) stosuje niejawny (automatyczny) zwrot wartości. Wszystko, co znajduje się wewnątrz nawiasów okrągłych, zostanie automatycznie zwrócone przez funkcję bez konieczności używania słowa kluczowego return. Zapis => {...} tworzy tradycyjny blok kodu. W tym przypadku funkcja wymaga jawnego użycia instrukcji return, aby cokolwiek zwrócić.
-
-
-8. Kiedy można pominąć return?
-Return można pominąć, gdy w funkcji strzałkowej używamy skróconego zapisu z nawiasami okrągłym => (...) (lub zapisu jednoliniowego bez nawiasów klamrowych), a funkcja ma jedynie zwrócić jedną wartość lub element JSX.
-
-
-9. Kiedy trzeba zastosować return?
-Słowo kluczowe return jest wymagane, gdy w funkcji strzałkowej używamy nawiasów klamrowych => {...} (bloku kodu).
-
-
-10. Co stanie się, jeśli zastosujemy {} bez return?
-Funkcja nie zwróci żadnej wartości (zwróci undefined). W efekcie metoda map() wygeneruje nową tablicę wypełnioną wartościami undefined, co w React skutkuje brakiem wyrenderowania oczekiwanych elementów.
-
-
-11. Dlaczego w JSX często stosujemy => (...)?
-Ponieważ zapis ten jest krótszy, bardziej zwięzły i czytelny. Pozwala na automatyczne zwracanie wieloliniowych fragmentów kodu JSX bez konieczności otwierania bloku kodu i dopisywania słowa return.
-
-
-12. Kiedy lepiej zastosować => {...}?
-Gdy przed zwróceniem elementu JSX musimy wykonać dodatkowe operacje lub instrukcje w JavaScript (np. zalogować coś w konsoli za pomocą console.log(), przetworzyć zmienne czy wykonać obliczenia).
-
-
-13. Dlaczego map() umieszczamy w JSX wewnątrz {}?
-Nawiasy klamrowe {} w JSX służą do osadzania dynamicznych wyrażeń JavaScript wewnątrz kodu struktury interfejsu. Pozwalają na przełączenie się z trybu JSX na tryb wykonywania kodu JS.
-
-
-14. Czy za pomocą map() można generować komponenty?
-Tak. Jest to podstawowy sposób dynamicznego tworzenia wielu instancji komponentów w React na podstawie danych zapisanych w tablicy.
-
-
-15. Do czego służy key?
-Key to specjalny atrybut wymagany przez Reacta podczas renderowania list elementów. Służy do unikalnej identyfikacji każdego elementu na liście, co pozwala Reactowi efektywnie śledzić, które elementy uległy zmianie, zostały dodane lub usunięte.
-
-
-16. Dlaczego id jest dobrym kandydatem na key?
-Ponieważ id z reguły stanowi unikalny identyfikator danego rekordu/obiektu w bazie danych lub w samej strukturze aplikacji, co gwarantuje, że żaden inny element na liście nie będzie posiadał takiej samej wartości key.
+10. Jak połączyć map(), props i onClick?
+Za pomocą map() generujemy komponenty na podstawie tablicy obiektów, przy czym każdy komponent dostaje atrybut key. Do każdego komponentu przekazujemy dane (np. name, category, hours) przez props. Wewnątrz komponentu przycisk z onClick wykorzystuje te dane, np. wypisuje je w konsoli. Można też przekazać przez props funkcję (np. onSelect={selectTechnology}), którą przycisk wywoła z name danego komponentu: onClick={() => onSelect(name)}. Przepływ: tablica -> map() -> komponent -> props -> onClick.

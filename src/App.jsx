@@ -1,134 +1,62 @@
 import Header from "./components/Header";
 import Technology from "./components/Technology";
 import Footer from "./components/Footer";
-import Student from "./components/Student";
+import Product from "./components/Product";
 
 function App() {
 
-  const technologies = [
-    {
-      id: 1,
-      name: "React",
-      category: "Frontend",
-      hours: 30
-    },
-    {
-      id: 2,
-      name: "Node.js",
-      category: "Backend",
-      hours: 40
-    },
-    {
-      id: 3,
-      name: "MySQL",
-      category: "Baza danych",
-      hours: 20
-    },
-    {
-      id: 4,
-      name: "Express",
-      category: "Backend",
-      hours: 25
-    }
-  ];
-
-
-    const students = [
-    { id: 1, name: "Anna", className: "4P", age: 17, specialization: "Tworzenie aplikacji desktopowych"},
-    { id: 2, name: "Jan", className: "4P", age: 19, specialization: "Tworzenie aplikacji mobilnych" },
-    { id: 3, name: "Adam", className: "4P", age: 18, specialization: "Tworzenie aplikacji webowych" },
-    { id: 4, name: "Nikodem", className: "4P", age: 17, specialization: "Tworzenie aplikacji mobilnych" }
-  ];
-
-  {
-    /*
-    const samochody = [
-    { id: 1, marka: "Toyota", model: "Corolla" },
-    { id: 2, marka: "BMW", model: "Seria 3" },
-    { id: 3, marka: "Audi", model: "A4" },
-    { id: 4, marka: "Mercedes-Benz", model: "Klasa C" },
-    { id: 5, marka: "Ford", model: "Mustang" }
-  ];
-
-    return (
-      <>
-        {
-          technologies.map((technology) => {
-          console.log(technology.name);
-
-          return technology.name;
-        })
-
-        }
-
-        <br />
-
-        {
-          samochody.map((samochod) => {
-          console.log(samochod.marka);
-
-          return samochod.marka + " ";
-        })
-
-        }
-      </>
-    );
-    */
+  function selectTechnology(name) {
+    console.log("Wybrano: " + name);
   }
 
-  {
-    /*
-      return (
-        <>
-          {
-            technologies.map((technology) => {
-            console.log(technology.name);
-
-            return technology.name;
-          })
-
-          }
-        </>
-      );
-  */
+  function selectProduct(name) {
+    console.log(`Wybrano produkt: ${name}`)
   }
-  
 
   return (
     <>
-      <Header />
+    <Header/>
 
-      <hr />
+      <br/>
+      <br/>
 
-      <main>
-        {/*Sposób 1. - Niejawny return*/
-        technologies.map((technology) => (
-          <Technology
-            key={technology.id}
-            name={technology.name}
-            category={technology.category}
-            hours={technology.hours}
-          />
-        ))}
+      <Technology
+        name="React"
+        category="Frontend"
+        hours={30}
+        onSelect={selectTechnology}
+      />
 
-        { /*Sposób 2. - Jawny return*/
-        /*technologies.map((technology) => {
-          return <Technology key={technology.id} name={technology.name}
-            category={technology.category} hours={technology.hours}/>
-        })*/}
+      <br/>
+      <br/>
+      <br/>
 
-        <br />
-        <br />
-        <br />
+    {/*Zakomentowano działanie zadania samodzielnego,
+    w celach ekspandacji kodu według polecenia
+    w zadaniu dodatkowym - w oparcie o przekazanie
+    funkcji poprzez Props - w przypadku zadania samodzielnego
+    w funkcji nie znajduje się jeszcze onSelect,
+    jednak z racji realizacji zadania dodatkowego już się ono
+    tam znajduje*/}
 
-        <Student students = {students}/>
-      </main>
+    {/*<Product 
+      name="Laptop" 
+      price="599.99zł" 
+    />*/}
 
-      <hr />
+    <Product 
+      name="Laptop" 
+      price="599.99zł" 
+      onSelect = {selectProduct}
+    />
 
-      <Footer />
+      <br/>
+      <br/>
+
+    <Footer/>
     </>
   );
+
 }
 
 export default App;
