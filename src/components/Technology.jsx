@@ -6,7 +6,7 @@ function Technology({ name, category, hours, onSelect }) {
       <p>{hours}</p>
 
       <button onClick={() => onSelect(name)}>
-        Wybierz
+        Wybierz technologię
       </button>
     </section>
   );

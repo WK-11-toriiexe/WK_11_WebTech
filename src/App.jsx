@@ -2,6 +2,7 @@ import Header from "./components/Header";
 import Technology from "./components/Technology";
 import Footer from "./components/Footer";
 import Product from "./components/Product";
+import User from "./components/User";
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
   function selectProduct(name) {
     console.log(`Wybrano produkt: ${name}`)
   }
+
 
   return (
     <>
@@ -31,24 +33,17 @@ function App() {
       <br/>
       <br/>
 
-    {/*Zakomentowano działanie zadania samodzielnego,
-    w celach ekspandacji kodu według polecenia
-    w zadaniu dodatkowym - w oparcie o przekazanie
-    funkcji poprzez Props - w przypadku zadania samodzielnego
-    w funkcji nie znajduje się jeszcze onSelect,
-    jednak z racji realizacji zadania dodatkowego już się ono
-    tam znajduje*/}
-
-    {/*<Product 
-      name="Laptop" 
-      price="599.99zł" 
-    />*/}
-
     <Product 
       name="Laptop" 
-      price="599.99zł" 
+      price={price}
       onSelect = {selectProduct}
     />
+
+      <br/>
+      <br/>
+      <br/>
+
+      <User name="Anna" role="Administrator" />
 
       <br/>
       <br/>
