@@ -35,7 +35,7 @@ function App() {
 
     <Product 
       name="Laptop" 
-      price={price}
+      price={3500}
       onSelect = {selectProduct}
     />
 
