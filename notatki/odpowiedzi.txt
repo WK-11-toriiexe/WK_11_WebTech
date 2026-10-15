@@ -1,0 +1,37 @@
+Lekcja 7 - Stan komponentu - useState
+
+1. Czym jest state?
+State (stan) to dane komponentu, które mogą zmieniać się podczas działania aplikacji. Przykłady: licznik, informacja czy element jest widoczny, wartość pola formularza, wybrany produkt, lista produktów, status zalogowania.
+
+2. Do czego służy useState?
+useState służy do przechowywania w komponencie zmieniających się danych. Zwykła zmienna (np. let count = 0) nie jest mechanizmem stanu React, więc jej zmiana nie odświeża interfejsu, nawet jeśli wartość w konsoli się zmienia. Zmiana stanu utworzonego przez useState informuje React, że trzeba zaktualizować interfejs.
+
+3. Skąd importujemy useState?
+Z biblioteki React: import { useState } from "react";
+
+4. Co oznacza count?
+To aktualna wartość stanu. Możemy ją odczytać i wyświetlić w komponencie, np. <p>Licznik: {count}</p>.
+
+5. Co oznacza setCount?
+To funkcja służąca do zmiany stanu count. Stanu nie zmieniamy bezpośrednio, lecz przez tę funkcję, np. setCount(count + 1), setCount(count - 1) czy setCount(0).
+
+6. Co oznacza 0 w useState(0)?
+To wartość początkowa stanu. Przy pierwszym renderowaniu komponentu count jest równe 0.
+
+7. Jak zwiększyć count o jeden?
+Za pomocą funkcji ustawiającej: setCount(count + 1), np. w przycisku: <button onClick={() => setCount(count + 1)}>Zwiększ</button>. Można też utworzyć osobną funkcję function add() { setCount(count + 1); } i użyć jej: onClick={add}.
+
+8. Co dzieje się z interfejsem po zmianie stanu?
+Po wywołaniu setCount(count + 1) React oblicza nową wartość, aktualizuje stan, ponownie renderuje komponent i wyświetla nową wartość. Użytkownik od razu widzi zaktualizowany interfejs, bez przeładowania strony.
+
+9. Czym różnią się props od state?
+Props są przekazywane do komponentu z zewnątrz, pochodzą od komponentu nadrzędnego, komponent nie powinien ich modyfikować i służą do przekazywania danych. State jest przechowywany przez sam komponent, jest w nim tworzony, można go aktualizować przez funkcję ustawiającą i służy do obsługi zmieniających się danych.
+
+10. Czy state może przechowywać tekst?
+Tak, np. const [name, setName] = useState("React"); Stan może przechowywać też liczby, wartości logiczne, tablice (useState([])) i obiekty (useState({ name: "Jan", age: 18 })).
+
+11. Czy state może przechowywać wartość true lub false?
+Tak, np. const [visible, setVisible] = useState(true); Wartość zmieniamy przez setVisible(false) albo ustawiamy na przeciwną: setVisible(!visible).
+
+12. Co oznacza !visible?
+To negacja, czyli wartość przeciwna do visible. Jeśli visible jest true, to !visible jest false, a jeśli visible jest false, to !visible jest true. Dzięki temu setVisible(!visible) przełącza stan w obie strony. Wynik można wyświetlić np. operatorem warunkowym: {visible ? "true" : "false"}.
