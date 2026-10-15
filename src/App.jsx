@@ -1,10 +1,10 @@
 
 
 import Header from "./components/Header";
-import Technology from "./components/Technology";
 import Footer from "./components/Footer";
 import Counter from "./components/Counter";
 import Switcher from "./components/Switcher";
+import Info from "./components/Info";
 
 function App() {
   return (
@@ -20,6 +20,11 @@ function App() {
       <br/>
 
       <Switcher/>
+
+      <br/>
+      <br/>
+
+      <Info/>
 
       <br/>
       <br/>
