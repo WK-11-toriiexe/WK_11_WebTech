@@ -1,5 +1,7 @@
 import Header from "./components/Header";
 import Technology from "./components/Technology";
+import Score from "./components/Score";
+import Lamp from "./components/Lamp";
 import Footer from "./components/Footer";
 
 function App() {
@@ -22,6 +24,17 @@ function App() {
 
       <br />
       <br />
+
+    <Score />
+    
+
+    <br />
+    <br />
+
+    <Lamp />
+
+    <br />
+    <br />
 
       {technologies.map((technology) => (
         <Technology 
