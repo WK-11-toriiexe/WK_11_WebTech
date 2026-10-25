@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podstawy filter()</title>
+</head>
+<body>
+    <script>
+        const products = [
+        { id: 1, name: "Laptop", category: "Komputery", price: 3500 },
+        { id: 2, name: "Mysz", category: "Akcesoria", price: 80 },
+        { id: 3, name: "Klawiatura", category: "Akcesoria", price: 200 },
+        { id: 4, name: "Monitor", category: "Monitory", price: 900 }
+        ];
+
+        const accessories = products.filter(
+        (product) => product.category === "Akcesoria"
+        );
+
+        //Modyfikacje
+        //1)
+        const computers = products.filter(
+        (product) => product.category === "Komputery"
+        );
+        console.log(computers)
+        //2
+        const produktTrzeci = products.filter(
+        (product) => product.id === 3
+        );
+        console.log(produktTrzeci)
+        //Napisane przez: Kędzior Wiktoria 4P
+    </script>
+</body>
+</html>
