@@ -1,37 +1,39 @@
-Lekcja 7 - Stan komponentu - useState
+1. Co zwraca filter() i czy zmienia tablicę źródłową?
 
-1. Czym jest state?
-State (stan) to dane komponentu, które mogą zmieniać się podczas działania aplikacji. Przykłady: licznik, informacja czy element jest widoczny, wartość pola formularza, wybrany produkt, lista produktów, status zalogowania.
+filter() zwraca nową tablicę zawierającą tylko te elementy, dla których funkcja filtrująca zwróciła wartość prawdziwą. Samo filter() nie zmienia tablicy źródłowej i niczego z niej nie usuwa. W przykładzie z materiału numbers.filter((number) => number > 10) daje [12, 20], a numbers nadal ma postać [3, 8, 12, 5, 20]. Kolejność pasujących elementów pozostaje taka sama jak w źródle. Przy tablicy obiektów nowa tablica zawiera odwołania do tych samych obiektów, a nie ich kopie, więc zmiana pola obiektu w funkcji filtrującej mogłaby wpłynąć również na dane w tablicy źródłowej. Dlatego funkcja filtrująca powinna jedynie sprawdzać warunek, bez modyfikowania obiektów.
 
-2. Do czego służy useState?
-useState służy do przechowywania w komponencie zmieniających się danych. Zwykła zmienna (np. let count = 0) nie jest mechanizmem stanu React, więc jej zmiana nie odświeża interfejsu, nawet jeśli wartość w konsoli się zmienia. Zmiana stanu utworzonego przez useState informuje React, że trzeba zaktualizować interfejs.
+2. Co oznacza true zwrócone przez funkcję filtrującą?
 
-3. Skąd importujemy useState?
-Z biblioteki React: import { useState } from "react";
+Oznacza: zachowaj ten element w wyniku. False oznacza: pomiń go. Ściślej, JavaScript ocenia prawdziwość zwróconej wartości, a nie tylko dosłowne true i false. Funkcja jest wywoływana dla każdego elementu po kolei, na przykład dla 12 warunek 12 > 10 daje true, więc 12 trafia do wyniku, a dla 8 daje false, więc 8 jest pomijane.
 
-4. Co oznacza count?
-To aktualna wartość stanu. Możemy ją odczytać i wyświetlić w komponencie, np. <p>Licznik: {count}</p>.
+3. Co otrzymamy, gdy żaden element nie spełnia warunku?
 
-5. Co oznacza setCount?
-To funkcja służąca do zmiany stanu count. Stanu nie zmieniamy bezpośrednio, lecz przez tę funkcję, np. setCount(count + 1), setCount(count - 1) czy setCount(0).
+Otrzymamy pustą tablicę [], a nie błąd ani undefined. Dzięki temu na wyniku można bezpiecznie wywołać map() i sprawdzić filteredTechnologies.length === 0, aby wyświetlić komunikat, na przykład „Brak technologii w wybranej kategorii”. W projekcie WebTech widać to po tymczasowym dodaniu przycisku „Inne”, dla którego nie ma żadnych danych.
 
-6. Co oznacza 0 w useState(0)?
-To wartość początkowa stanu. Przy pierwszym renderowaniu komponentu count jest równe 0.
+4. Czym różnią się filter() i map()?
 
-7. Jak zwiększyć count o jeden?
-Za pomocą funkcji ustawiającej: setCount(count + 1), np. w przycisku: <button onClick={() => setCount(count + 1)}>Zwiększ</button>. Można też utworzyć osobną funkcję function add() { setCount(count + 1); } i użyć jej: onClick={add}.
+filter() wybiera elementy spełniające warunek, czyli zwraca te same elementy, ale w mniejszej lub równej liczbie, na przykład tablicę produktów z kategorii „Akcesoria”. map() przekształca każdy element w inny, więc wynik ma tyle samo elementów co źródło, na przykład tablicę elementów JSX prezentujących produkty. Najpierw wybieramy dane za pomocą filter(), a potem tworzymy ich widok za pomocą map(). Można je połączyć w jednym wyrażeniu, ale osobna zmienna, na przykład filteredProducts, ułatwia prześledzenie wyniku.
 
-8. Co dzieje się z interfejsem po zmianie stanu?
-Po wywołaniu setCount(count + 1) React oblicza nową wartość, aktualizuje stan, ponownie renderuje komponent i wyświetla nową wartość. Użytkownik od razu widzi zaktualizowany interfejs, bez przeładowania strony.
+5. Kiedy funkcja strzałkowa wymaga jawnego return?
 
-9. Czym różnią się props od state?
-Props są przekazywane do komponentu z zewnątrz, pochodzą od komponentu nadrzędnego, komponent nie powinien ich modyfikować i służą do przekazywania danych. State jest przechowywany przez sam komponent, jest w nim tworzony, można go aktualizować przez funkcję ustawiającą i służy do obsługi zmieniających się danych.
+Wymaga go wtedy, gdy ma ciało w klamrach. Zapis skrócony, bez klamer, zwraca wynik wyrażenia automatycznie, czyli (number) => number > 10 działa bez return, natomiast (number) => { return number > 10; } już go potrzebuje. Bez return funkcja z klamrami zwraca undefined, co jest wartością fałszywą, więc żaden element nie trafia do wyniku i dostajemy pustą tablicę. Na tym polega błąd z zadania 5, gdzie w klamrach stoi samo product.price < 1000; bez return.
 
-10. Czy state może przechowywać tekst?
-Tak, np. const [name, setName] = useState("React"); Stan może przechowywać też liczby, wartości logiczne, tablice (useState([])) i obiekty (useState({ name: "Jan", age: 18 })).
+6. Dlaczego kategorię przechowujemy w stanie App?
 
-11. Czy state może przechowywać wartość true lub false?
-Tak, np. const [visible, setVisible] = useState(true); Wartość zmieniamy przez setVisible(false) albo ustawiamy na przeciwną: setVisible(!visible).
+Wybrana kategoria jest wartością, którą zmienia użytkownik, a po jej zmianie React ma ponownie wyrenderować interfejs, więc musi być zapisana w stanie. Wybór dotyczy całej kolekcji kart, dlatego stan musi leżeć w komponencie, który zawiera zarówno przyciski, jak i siatkę kart, czyli w App. Nie umieszczamy go osobno w każdej karcie, bo każda miałaby wtedy własny, niezależny wybór, ani wewnątrz map(). Wartość początkowa to "Wszystkie".
 
-12. Co oznacza !visible?
-To negacja, czyli wartość przeciwna do visible. Jeśli visible jest true, to !visible jest false, a jeśli visible jest false, to !visible jest true. Dzięki temu setVisible(!visible) przełącza stan w obie strony. Wynik można wyświetlić np. operatorem warunkowym: {visible ? "true" : "false"}.
+7. Jak działa warunek z || obsługujący „Wszystkie”?
+
+W warunku selectedCategory === "Wszystkie" || technology.category === selectedCategory operator || oznacza „lub”. Element zostaje wybrany, gdy aktywna jest opcja „Wszystkie”, wtedy pierwszy człon jest prawdziwy dla każdego elementu i przechodzą wszystkie, albo gdy kategoria elementu zgadza się z wybraną kategorią. „Wszystkie” jest specjalną opcją interfejsu, a nie kategorią zapisaną w danych, więc samo porównanie category === selectedCategory by tego nie obsłużyło, bo żaden obiekt nie ma kategorii „Wszystkie”. Ważne jest też użycie === zamiast =, ponieważ pojedynczy znak równości przypisuje wartość, oraz pamiętanie, że wielkość liter ma znaczenie.
+
+8. Dlaczego wynik filtrowania nie potrzebuje osobnego useState?
+
+Ponieważ jest to wartość wyliczana z innych danych, a nie niezależna informacja. Stan zapisuje tylko wybór użytkownika, czyli selectedCategory. Przy każdym renderowaniu filteredTechnologies jest obliczane na nowo w funkcji komponentu, przed return, na podstawie aktualnej kategorii. Po kliknięciu przycisku zmienia się stan, React ponownie renderuje komponent, filter() wybiera pasujące elementy, a map() tworzy ich widok. Osobny stan na wyniki byłby zbędny. Dodatkowo zawsze filtrujemy pełną tablicę technologies, dzięki czemu przejście z „Frontend” do „Backend” wybiera dane z całej kolekcji, a „Wszystkie” przywraca komplet.
+
+9. Dlaczego do onClick przekazujemy funkcję?
+
+Ponieważ onClick oczekuje funkcji, która zostanie wykonana dopiero po kliknięciu. Zapis onClick={() => setSelectedCategory("Akcesoria")} przekazuje właśnie taką funkcję. Zapis onClick={setSelectedCategory("Akcesoria")} wywołałby setSelectedCategory od razu, podczas renderowania, a do onClick trafiłby jej wynik. Aktualizacja stanu w trakcie renderowania powoduje kolejne renderowanie, które znów ją wykonuje, co kończy się błędem zbyt wielu renderowań.
+
+10. Dlaczego karta po usunięciu z widoku i ponownym dodaniu traci lokalne polubienia?
+
+Gdy karta nie trafia do wyniku filter() i map(), nie jest renderowana, więc React usuwa jej instancję razem z lokalnym stanem, czyli likes, isLearning i visible. Kiedy karta wraca, powstaje jako nowa instancja i jej stan zaczyna od wartości początkowych. Stabilny key, czyli technology.id, nie przechowuje stanu usuniętej karty, a jedynie pomaga Reactowi rozpoznać, która karta jest którą, gdy pozostaje w widoku. Przykład z materiału: polubienie Reacta dwa razy, wybór „Frontend”, przy którym React zachowuje polubienia, potem wybór „Backend”, gdzie React znika, i powrót do „Frontend”, gdzie pojawia się z licznikiem 0. Jest to oczekiwany efekt na tym etapie, a zachowanie danych kart mimo ich znikania z widoku wymagałoby późniejszego przeniesienia stanu wyżej, do komponentu nadrzędnego.
