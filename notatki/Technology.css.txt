@@ -1,0 +1,80 @@
+/* ===== Karta i kolory kategorii ===== */
+.technology-card {
+  background-color: var(--main-color);
+  margin: 5%;
+  padding-bottom: 15px;
+  border-radius: 80px;
+}
+
+.theme-frontend {
+  --main-color: #E65100;
+  --light-color: #FFE0B2;
+}
+
+.theme-backend {
+  --main-color: #4A148C;
+  --light-color: #E1BEE7;
+}
+
+.theme-database {
+  --main-color: #01579B;
+  --light-color: #B3E5FC;
+}
+
+/* ===== Obrazek ===== */
+.technology-header {
+  padding: 15px;
+}
+
+.technology-image {
+  border-radius: 80px;
+}
+
+/* ===== Treść karty ===== */
+.technology-body {
+  color: var(--main-color);
+}
+
+/* ===== Badge (/Etykiety karty) ===== */
+.badge {
+  background-color: var(--light-color);
+  margin: auto;
+  border-radius: 80px;
+}
+
+.badge-name {
+  width: 50%;
+  margin-bottom: 15px;
+}
+
+.badge-category {
+  width: 35%;
+}
+
+.badge-hours {
+  width: 25%;
+  margin-top: 15px;
+}
+
+.badge-likes {
+  width: 25%;
+  margin-top: 15px;
+}
+
+.badge-status {
+  width: 35%;
+  margin-top: 15px;
+}
+
+/* ===== Przyciski ===== */
+.button-details {
+  margin-bottom: 15px;
+}
+
+.button-space-right {
+  margin-right: 7px;
+}
+
+.button-console {
+  margin-top: 15px;
+}
