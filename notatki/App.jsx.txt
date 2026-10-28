@@ -1,8 +1,12 @@
 import Header from "./components/Header";
 import Technology from "./components/Technology";
 import Footer from "./components/Footer";
+import { useState } from "react";
+import './App.css';
 
 function App() {
+
+  const [selectedCategory, setSelectedCategory] = useState("Wszystkie");
 
   const technologies = [
   { id: 1, name: "React", category: "Frontend", hours: 30, image: "react.webp" },
@@ -16,6 +20,11 @@ function App() {
   { id: 9, name: "PHP", category: "Backend", hours: 35, image: "php.webp" }
   ];
 
+  const filteredTechnologies = technologies.filter((technology) => {
+    return selectedCategory === "Wszystkie" ||
+      technology.category === selectedCategory;
+  });
+
   return (
     <>
       <Header />
@@ -24,8 +33,40 @@ function App() {
       <br />
 
       <main>
+        <div className="technology-filters">
+          <button
+            className={selectedCategory === "Wszystkie" ? "active" : ""}
+            aria-pressed={selectedCategory === "Wszystkie"}
+            onClick={() => setSelectedCategory("Wszystkie")}>
+            Wszystkie
+          </button>
+          <button
+            className={selectedCategory === "Frontend" ? "active" : ""}
+            aria-pressed={selectedCategory === "Frontend"}
+            onClick={() => setSelectedCategory("Frontend")}>
+            Frontend
+          </button>
+          <button
+            className={selectedCategory === "Backend" ? "active" : ""}
+            aria-pressed={selectedCategory === "Backend"}
+            onClick={() => setSelectedCategory("Backend")}>
+            Backend
+          </button>
+          <button
+            className={selectedCategory === "Baza danych" ? "active" : ""}
+            aria-pressed={selectedCategory === "Baza danych"}
+            onClick={() => setSelectedCategory("Baza danych")}>
+            Baza danych
+          </button>
+        </div>
+        <div className="chosen-category-grid">
+          <p>Wybrana kategoria: {selectedCategory}</p>
+          <p>Liczba technologi: {filteredTechnologies.length}</p>
+          {filteredTechnologies.length === 0 &&
+          <p>Brak technologii w wybranej kategorii</p>}
+        </div>
         <div className="technology-grid">
-          {technologies.map((technology) => (
+          {filteredTechnologies.map((technology) => (
             <Technology
               key={technology.id}
               name={technology.name}
