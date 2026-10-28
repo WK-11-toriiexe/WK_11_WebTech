@@ -1,0 +1,57 @@
+
+/* ===== Karta kursu ===== */
+.coursecard-card {
+  background-color: #4A148C;
+  margin: 5%;
+  padding: 20px;
+  border-radius: 50px;
+  text-align: center;
+  color: #4A148C;
+}
+
+/* ===== Nazwa kursu ===== */
+.coursecard-card-name {
+  background-color: #E1BEE7;
+  width: 70%;
+  margin: auto;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 80px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* ===== Szczegóły kursu ===== */
+.coursecard-card-details {
+  background-color: #E1BEE7;
+  width: 80%;
+  margin: auto;
+  padding: 10px;
+  border-radius: 30px;
+}
+
+/* ===== Poziom kursu ===== */
+.coursecard-card-level {
+  margin-bottom: 10px;
+}
+
+/* ===== Liczba godzin ===== */
+.coursecard-card-hours {
+  margin-bottom: 5px;
+}
+
+/* ===== Przycisk ===== */
+.coursecard-card button {
+  background-color: #E1BEE7;
+  color: #4A148C;
+  margin-top: 15px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 80px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.coursecard-card button:hover {
+  background-color: #CE93D8;
+}

@@ -1,8 +1,51 @@
 import Header from "./components/Header";
 import Technology from "./components/Technology";
 import Footer from "./components/Footer";
+import CourseCard from "./components/CourseCard";
+import MovieCard from "./components/MovieCard";
 
 function App() {
+  const courses = [
+    {
+      id: 1,
+      name: "JavaScript",
+      level: "Podstawowy",
+      hours: 30
+    },
+    {
+      id: 2,
+      name: "React",
+      level: "Średniozaawansowany",
+      hours: 40
+    },
+    {
+      id: 3,
+      name: "Node.js",
+      level: "Średniozaawansowany",
+      hours: 35
+    }
+  ];
+
+  const movies = [
+    {
+      id: 1,
+      title: "Incepcja",
+      year: 2010,
+      category: "Science fiction"
+    },
+    {
+      id: 2,
+      title: "Matrix",
+      year: 1999,
+      category: "Science fiction"
+    },
+    {
+      id: 3,
+      title: "Gladiator",
+      year: 2000,
+      category: "Dramat"
+    }
+  ];
 
   const technologies = [
   { id: 1, name: "React", category: "Frontend", hours: 30, image: "react.webp" },
@@ -24,6 +67,34 @@ function App() {
       <br />
 
       <main>
+        <div className="coursecard-grid">
+          {courses.map((course) => (
+            <CourseCard
+              key={course.id}
+              name={course.name}
+              level={course.level}
+              hours={course.hours}
+            />
+          ))}
+        </div>
+
+        <br />
+        <br />
+
+        <div className="moviecard-grid">
+          {movies.map((movie) => (
+            <MovieCard
+              key={movie.id}
+              title={movie.title}
+              year={movie.year}
+              category={movie.category}
+            />
+          ))}
+        </div>
+
+        <br />
+        <br />
+
         <div className="technology-grid">
           {technologies.map((technology) => (
             <Technology

@@ -1,0 +1,65 @@
+
+/* ===== Karta filmu ===== */
+.moviecard-card {
+  background-color: #01579B;
+  margin: 5%;
+  padding: 20px;
+  border-radius: 50px;
+  text-align: center;
+  color: #01579B;
+}
+
+/* ===== Tytuł filmu ===== */
+.moviecard-card-title {
+  background-color: #B3E5FC;
+  width: 70%;
+  margin: auto;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 80px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* ===== Szczegóły filmu ===== */
+.moviecard-card-details {
+  background-color: #B3E5FC;
+  width: 80%;
+  margin: auto;
+  padding: 10px;
+  border-radius: 30px;
+}
+
+/* ===== Rok i kategoria ===== */
+.moviecard-card-level {
+  margin-bottom: 10px;
+}
+
+.moviecard-card-category {
+  margin-bottom: 5px;
+}
+
+/* ===== Licznik polubień ===== */
+.moviecard-card-likes {
+  background-color: #B3E5FC;
+  width: 40%;
+  margin: 15px auto;
+  padding: 10px;
+  border-radius: 80px;
+}
+
+/* ===== Przyciski ===== */
+.moviecard-card button {
+  background-color: #B3E5FC;
+  color: #01579B;
+  margin: 7px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 80px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.moviecard-card button:hover {
+  background-color: #81D4FA;
+}

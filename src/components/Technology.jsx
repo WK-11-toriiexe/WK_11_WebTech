@@ -49,8 +49,8 @@ function Technology({ name, category, hours, image }) {
 
         {visible && (
           <div className="technology-details">
-            <p className="badge badge-category">{category}</p>
-            <p className="badge badge-hours">Czas nauki: {hours} godz.</p>
+            <p className="badge badge-category">Kategoria: {category}</p>
+            <p className="badge badge-hours">Liczba godzin: {hours}</p>
           </div>
         )}
 
