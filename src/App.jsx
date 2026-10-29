@@ -1,5 +1,6 @@
 import { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import PhotoCard from "./components/PhotoCard";
 
 function App() {
   const [showFlowers, setShowFlowers] = useState(true);
@@ -26,51 +27,91 @@ function App() {
     );
   });
 
+  function download(id) {
+    setPhotos((previousPhotos) =>
+      previousPhotos.map((photo) => {
+        if (photo.id === id) {
+          return { ...photo, downloads: photo.downloads + 1 };
+        }
+        return photo;
+      })
+    );
+  }
+
+  function reset(id) {
+    setPhotos((previousPhotos) =>
+      previousPhotos.map((photo) => {
+        if (photo.id === id) {
+          return { ...photo, downloads: 0 };
+        }
+        return photo;
+      })
+    );
+  }
+
   return (
-    <div className="main">
-      <div className="form-check form-switch form-check-inline">
-        <input
-          className="form-check-input"
-          type="checkbox"
-          role="switch"
-          id="flowers"
-          checked={showFlowers}
-          onChange={(event) => setShowFlowers(event.target.checked)}
-        />
-        <label className="form-check-label" htmlFor="flowers">
-          Kwiaty
-        </label>
+    <div className="container my-4">
+      <h1>Galeria</h1>
+
+      <div className="mb-3">
+        <div className="form-check form-switch form-check-inline">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="flowers"
+            checked={showFlowers}
+            onChange={(event) => setShowFlowers(event.target.checked)}
+          />
+          <label className="form-check-label" htmlFor="flowers">
+            Kwiaty
+          </label>
+        </div>
+
+        <div className="form-check form-switch form-check-inline">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="animals"
+            checked={showAnimals}
+            onChange={(event) => setShowAnimals(event.target.checked)}
+          />
+          <label className="form-check-label" htmlFor="animals">
+            Zwierzęta
+          </label>
+        </div>
+
+        <div className="form-check form-switch form-check-inline">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="cars"
+            checked={showCars}
+            onChange={(event) => setShowCars(event.target.checked)}
+          />
+          <label className="form-check-label" htmlFor="cars">
+            Samochody
+          </label>
+        </div>
       </div>
 
-      <div className="form-check form-switch form-check-inline">
-        <input
-          className="form-check-input"
-          type="checkbox"
-          role="switch"
-          id="animals"
-          checked={showAnimals}
-          onChange={(event) => setShowAnimals(event.target.checked)}
-        />
-        <label className="form-check-label" htmlFor="animals">
-          Zwierzęta
-        </label>
-      </div>
+      <p>Liczba widocznych zdjęć: {filteredPhotos.length}</p>
+      {filteredPhotos.length === 0 && <p>Brak zdjęć do wyświetlenia.</p>}
 
-      <div className="form-check form-switch form-check-inline">
-        <input
-          className="form-check-input"
-          type="checkbox"
-          role="switch"
-          id="cars"
-          checked={showCars}
-          onChange={(event) => setShowCars(event.target.checked)}
-        />
-        <label className="form-check-label" htmlFor="cars">
-          Samochody
-        </label>
+      <div>
+        {filteredPhotos.map((photo) => (
+          <PhotoCard
+            key={photo.id}
+            photo={photo}
+            onDownload={download}
+            onReset={reset}
+          />
+        ))}
       </div>
     </div>
-  )
+  );
 }
 
 export default App;
