@@ -25,45 +25,34 @@ function App() {
       technology.category === selectedCategory;
   });
 
-    const [photo, setPhoto] = useState({
-    id: 1,
-    alt: "Mak",
-    downloads: 35,
-    favorite: false
-  });
-  const [likes, setLikes] = useState(0);
+    const [photos, setPhotos] = useState([
+  { id: 10, alt: "Mak", downloads: 35 },
+  { id: 20, alt: "Bukiet", downloads: 43 },
+  { id: 30, alt: "Dalmatyńczyk", downloads: 2 },
+  { id: 40, alt: "Róża", downloads: 12 }
+]);
 
-  function download() {
-    setPhoto((previousPhoto) => ({
-      ...previousPhoto,
-      downloads: previousPhoto.downloads + 1
-    }));
+  function download(id) {
+    setPhotos((previousPhotos) =>
+      previousPhotos.map((photo) => {
+        if (photo.id === id) {
+          return { ...photo, downloads: photo.downloads + 1 };
+        }
+        return photo;
+      })
+    );
   }
 
-  function reset() {
-    setPhoto((previousPhoto) => ({
-      ...previousPhoto,
-      downloads: 0
-    }));
-  }
-
-  function changeName() {
-    setPhoto((previousPhoto) => ({
-      ...previousPhoto,
-      alt: "Czerwony mak"
-    }));
-  }
-
-  function isFavorite() {
-    setPhoto((previousPhoto) => ({
-      ...previousPhoto,
-      favorite: !previousPhoto.favorite
-    }));
-  }
-
-  function likesChanger() {
-    setLikes(likes + 1);
-  }
+  function reset(id) {
+  setPhotos((previousPhotos) =>
+    previousPhotos.map((photo) => {
+      if (photo.id === id) {
+        return { ...photo, downloads: 0 };
+      }
+      return photo;
+    })
+  );
+}
 
   return (
     <>
@@ -74,16 +63,16 @@ function App() {
 
       <main>
         <div className="photos">
+      <h1>Galeria</h1>
+      {photos.map((photo) => (
+        <div key={photo.id}>
           <h2>{photo.alt}</h2>
           <p>Pobrania: {photo.downloads}</p>
-          <button onClick={download}>Pobierz</button>
-          <button onClick={reset}>Wyzeruj</button>
-          <button onClick={changeName}>Zmień nazwę</button>
-          <button onClick={isFavorite}>Zmień ulubione</button>
-          <p>Ulubione: {photo.favorite ? "Tak" : "Nie"}</p>
-          <p>Polubienia: {likes}</p>
-          <button onClick={likesChanger}>Polub</button>
+          <button onClick={() => download(photo.id)}>Pobierz</button>
+          <button onClick={() => reset(photo.id)}>Wyzeruj</button>
         </div>
+      ))}
+    </div>
         <div className="technology-filters">
           <button
             className={selectedCategory === "Wszystkie" ? "active" : ""}
