@@ -25,6 +25,46 @@ function App() {
       technology.category === selectedCategory;
   });
 
+    const [photo, setPhoto] = useState({
+    id: 1,
+    alt: "Mak",
+    downloads: 35,
+    favorite: false
+  });
+  const [likes, setLikes] = useState(0);
+
+  function download() {
+    setPhoto((previousPhoto) => ({
+      ...previousPhoto,
+      downloads: previousPhoto.downloads + 1
+    }));
+  }
+
+  function reset() {
+    setPhoto((previousPhoto) => ({
+      ...previousPhoto,
+      downloads: 0
+    }));
+  }
+
+  function changeName() {
+    setPhoto((previousPhoto) => ({
+      ...previousPhoto,
+      alt: "Czerwony mak"
+    }));
+  }
+
+  function isFavorite() {
+    setPhoto((previousPhoto) => ({
+      ...previousPhoto,
+      favorite: !previousPhoto.favorite
+    }));
+  }
+
+  function likesChanger() {
+    setLikes(likes + 1);
+  }
+
   return (
     <>
       <Header />
@@ -33,6 +73,17 @@ function App() {
       <br />
 
       <main>
+        <div className="photos">
+          <h2>{photo.alt}</h2>
+          <p>Pobrania: {photo.downloads}</p>
+          <button onClick={download}>Pobierz</button>
+          <button onClick={reset}>Wyzeruj</button>
+          <button onClick={changeName}>Zmień nazwę</button>
+          <button onClick={isFavorite}>Zmień ulubione</button>
+          <p>Ulubione: {photo.favorite ? "Tak" : "Nie"}</p>
+          <p>Polubienia: {likes}</p>
+          <button onClick={likesChanger}>Polub</button>
+        </div>
         <div className="technology-filters">
           <button
             className={selectedCategory === "Wszystkie" ? "active" : ""}
