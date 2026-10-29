@@ -3,6 +3,7 @@ import Technology from "./components/Technology";
 import Footer from "./components/Footer";
 import { useState } from "react";
 import './App.css';
+import PhotoCard from "./components/PhotoCard";
 
 function App() {
 
@@ -62,17 +63,17 @@ function App() {
       <br />
 
       <main>
-        <div className="photos">
-      <h1>Galeria</h1>
-      {photos.map((photo) => (
-        <div key={photo.id}>
-          <h2>{photo.alt}</h2>
-          <p>Pobrania: {photo.downloads}</p>
-          <button onClick={() => download(photo.id)}>Pobierz</button>
-          <button onClick={() => reset(photo.id)}>Wyzeruj</button>
-        </div>
-      ))}
-    </div>
+      <div className="photos">
+        <h1>Galeria</h1>
+        {photos.map((photo) => (
+          <PhotoCard
+            key={photo.id}
+            photo={photo}
+            onDownload={download}
+            onReset={reset}
+          />
+        ))}
+      </div>
         <div className="technology-filters">
           <button
             className={selectedCategory === "Wszystkie" ? "active" : ""}
