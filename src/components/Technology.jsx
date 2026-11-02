@@ -9,11 +9,29 @@ function Technology({ name, category, hours, image }) {
     "theme-database";
 
   const [likes, setLikes] = useState(0);
-  const [isLearning, setIsLearning] = useState(false);
+  const [progress, setProgress] = useState({
+    completedHours: 0,
+    isLearning: false
+  });
   const [visible, setVisible] = useState(false);
 
   function toggleDetails() {
     setVisible(!visible);
+  }
+
+  function addHour() {
+    setProgress((previousProgress) => ({
+      ...previousProgress,
+      completedHours: previousProgress.completedHours + 1,
+      isLearning: true
+    }));
+  }
+
+  function toggleLearning() {
+    setProgress((previousProgress) => ({
+      ...previousProgress,
+      isLearning: !previousProgress.isLearning
+    }));
   }
 
   function showTechnology() {
@@ -73,9 +91,15 @@ function Technology({ name, category, hours, image }) {
         <br />
 
         <p className="badge badge-status">
-          Status nauki: {isLearning ? "Uczę się" : "Jeszcze się nie uczę"}
+          Status nauki: {progress.isLearning ? "Uczę się" : "Jeszcze się nie uczę"}
         </p>
-        <button onClick={() => setIsLearning(!isLearning)}>
+        <p className="badge badge-hours">
+          Przerobione godziny: {progress.completedHours}
+        </p>
+        <button className="button-space-right" onClick={addHour}>
+          Dodaj godzinę
+        </button>
+        <button onClick={toggleLearning}>
           Zmień status nauki
         </button>
 
