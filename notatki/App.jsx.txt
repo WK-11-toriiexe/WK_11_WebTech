@@ -1,30 +1,13 @@
 import { useState } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  const [showDescription, setShowDescription] = useState(false);
-  const [showDescriptionSwitch, setShowDescriptionSwitch] = useState(false);
+  const [showDescription, setShowDescription] = useState(true);
+  const [showPrice, setShowPrice] = useState(false);
 
   return (
     <div className="container">
-      <div>
-        <h1>Kurs React</h1>
-
-        <input
-          type="checkbox"
-          id="show-description"
-          checked={showDescription}
-          onChange={(event) => setShowDescription(event.target.checked)}
-        />
-        <label htmlFor="show-description">Pokaż opis</label>
-
-        <p>Opis: {showDescription ? "włączony" : "wyłączony"}</p>
-
-        {showDescription && <p>Na kursie poznajemy tworzenie aplikacji React.</p>}
-      </div>
-
-      <br />
-      <br />
+      <h1>Kurs React</h1>
 
       <div className="d-flex justify-content-center">
         <div className="form-check form-switch mb-3">
@@ -32,18 +15,40 @@ function App() {
             className="form-check-input"
             type="checkbox"
             role="switch"
-            id="show-description-switch"
-            checked={showDescriptionSwitch}
-            onChange={(event) => setShowDescriptionSwitch(event.target.checked)}
+            id="show-description"
+            checked={showDescription}
+            onChange={(event) => setShowDescription(event.target.checked)}
           />
-          <label className="form-check-label" htmlFor="show-description-switch">
+          <label className="form-check-label" htmlFor="show-description">
             Pokaż opis
           </label>
-        <p>Opis: {showDescriptionSwitch ? "włączony" : "wyłączony"}</p>
-
-        {showDescriptionSwitch && <p>Na kursie poznajemy tworzenie aplikacji React.</p>}
         </div>
       </div>
+
+      <button onClick={() => setShowDescription(false)}>Ukryj opis</button>
+
+      <p>Opis: {showDescription ? "włączony" : "wyłączony"}</p>
+
+      {showDescription && <p>Na kursie poznajemy tworzenie aplikacji React.</p>}
+    
+      <div className="d-flex justify-content-center">
+        <div className="form-check form-switch mb-3">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="show-price"
+            checked={showPrice}
+            onChange={(event) => setShowPrice(event.target.checked)}
+          />
+          <label className="form-check-label" htmlFor="show-price">
+            Pokaż cenę
+          </label>
+        </div>
+      </div>
+    
+    {showPrice && <p>Cena: 150 zł</p>}
+    
     </div>
   );
 }
