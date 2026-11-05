@@ -2,11 +2,13 @@ import Header from "./components/Header";
 import Technology from "./components/Technology";
 import Footer from "./components/Footer";
 import { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 
 function App() {
 
-  const [selectedCategory, setSelectedCategory] = useState("Wszystkie");
+  // const [selectedCategory, setSelectedCategory] = useState("Wszystkie");
+  const [onlyFrontend, setOnlyFrontend] = useState(false);
 
   const technologies = [
   { id: 1, name: "React", category: "Frontend", hours: 30, image: "react.webp" },
@@ -20,9 +22,13 @@ function App() {
   { id: 9, name: "PHP", category: "Backend", hours: 35, image: "php.webp" }
   ];
 
+  // const filteredTechnologies = technologies.filter((technology) => {
+  //   return selectedCategory === "Wszystkie" ||
+  //     technology.category === selectedCategory;
+  // });
+
   const filteredTechnologies = technologies.filter((technology) => {
-    return selectedCategory === "Wszystkie" ||
-      technology.category === selectedCategory;
+    return !onlyFrontend || technology.category === "Frontend";
   });
 
   return (
@@ -33,6 +39,21 @@ function App() {
       <br />
 
       <main>
+        <div className="form-check form-switch mb-3">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="only-frontend"
+            checked={onlyFrontend}
+            onChange={(event) => setOnlyFrontend(event.target.checked)}
+          />
+          <label className="form-check-label" htmlFor="only-frontend">
+            Tylko Frontend
+          </label>
+        </div>
+
+        {/*
         <div className="technology-filters">
           <button
             className={selectedCategory === "Wszystkie" ? "active" : ""}
@@ -59,12 +80,15 @@ function App() {
             Baza danych
           </button>
         </div>
+        */}
+
         <div className="chosen-category-grid">
-          <p>Wybrana kategoria: {selectedCategory}</p>
-          <p>Liczba technologi: {filteredTechnologies.length}</p>
+          {/* <p>Wybrana kategoria: {selectedCategory}</p> */}
+          <p>Liczba technologii: {filteredTechnologies.length}</p>
           {filteredTechnologies.length === 0 &&
           <p>Brak technologii w wybranej kategorii</p>}
         </div>
+
         <div className="technology-grid">
           {filteredTechnologies.map((technology) => (
             <Technology
