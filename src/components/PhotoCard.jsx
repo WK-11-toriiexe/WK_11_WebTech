@@ -4,7 +4,13 @@ function PhotoCard({ photo, onDownload, onReset }) {
   const [likes, setLikes] = useState(0);
 
   return (
-    <div>
+    <div className="d-inline-block">
+      <img
+        src={"/assets/" + photo.filename}
+        alt={photo.alt}
+        className="rounded"
+        style={{ margin: "5px", maxWidth: "200px" }}
+      />
       <h2>{photo.alt}</h2>
       <p>Pobrania: {photo.downloads}</p>
       <p>Polubienia: {likes}</p>
