@@ -1,84 +1,180 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  const [toGenPass, setToGenPass] = useState(true);
+  const [generatedPass, setGeneratedPass] = useState("");
+  const [passInputValue, setPassInputValue] = useState("");
+  const [passSeen, setPassSeen] = useState(false);
 
-  const app = {
-    name: "WebTech",
-    version: "1.0",
-    author: "Wiktoria Kędzior",
-    technologiesCount: 3
-  };
 
-  const technology = {
-    name: "React",
-    category: "Frontend",
-    hours: 30,
-    active: true
-  };
+  const [email, setEmail] = useState("");
+  const [login, setLogin] = useState("");
+  const [pass, setPass] = useState("");
 
-  const student = {
-    name: "Wiktoria",
-    surname: "Kędzior",
-    className: "4P",
-    specialization: "technik programista"
-  };
+  function fillIn(formData) {
+    const emailValue = formData.get("inputEmail") || ""; 
+    const loginValue = formData.get("inputLogin") || ""; 
+    
+    setEmail(emailValue);
+    setLogin(loginValue);
+    setPass(passInputValue);
+  }
 
-  const course = {
-    name: "Kurs HTML i CSS",
-    teacher: "mgr inż Ludwik de Laveaux",
-    hours: 26,
-    completed: true
-  };
+  function generatePassword() {
+    let randPass = "";
+    for (let i = 0; i < 12; i++) {
+      const charCode = Math.floor(Math.random() * 94) + 33;
+      randPass += String.fromCharCode(charCode);
+    }
+    setGeneratedPass(randPass);
+  }
+
+  function toPassField() {
+    setPassInputValue(generatedPass);
+  }
+
+  function handleToggleGenPass(event) {
+    const isChecked = event.target.checked;
+    setToGenPass(isChecked);
+    
+    if (!isChecked) {
+      setGeneratedPass("");
+    }
+  }
 
   return (
-    <div>
-
-      <h1>{app.name}</h1>
-
-      <p>Wersja: {app.version}</p>
-
-      <p>Autor: {app.author}</p>
-
-      <p>
-        Liczba technologii: {app.technologiesCount}
-      </p>
-
-
-      <br/>
-
-      <p>{technology.name}</p>
-
-      <p>Kategoria: {technology.category}</p>
-
-      <p>Liczba godzin: {technology.hours}</p>
-
-
-      <br/>
-
-      <p>Uczeń: {student.name} {student.surname}</p>
-
-      <p>Klasa: {technology.className}</p>
-
-      <p>Kierunek: {technology.specialization}</p>
-
-      <br/>
-
-      <section>
-        <h2>Kurs: {course.name}</h2>
-        <p>Nauczyciel: {course.teacher}</p>
-        <p>Godzin: {course.hours}</p>
-        <p>Czy ukończono kurs: {course.completed}</p>
-        <p>Istnieje możliwość zapisania do części drugiej kursu, trwającej {course.hours + 10} godzin. Kontynuować?</p>
-      </section>
-      
-
+    <>
+    <div className="sectionOne">
+      <h1>Menedżer haseł - wykonała: Wiktoria Kędzior</h1>
+      <form
+      action={fillIn}
+      >
+        <div className="form-group m-4">
+          <label 
+          htmlFor="inputEmail"
+          className="form-label d-block text-start"
+          >
+            Adres WWW
+          </label>
+          <input 
+          name="inputEmail"
+          type="email" 
+          className="form-control" 
+          id="inputEmail" 
+          placeholder="Adres strony WWW"
+          />
+        </div>
+        <div className="form-group m-4">
+          <label 
+          htmlFor="inputLogin"
+          className="form-label d-block text-start"
+          >
+            Login:
+          </label>
+          <input 
+          name="inputLogin"
+          type="text" 
+          className="form-control" 
+          id="inputLogin" 
+          placeholder="Twój login"
+          />
+        </div>
+        <div className="form-group m-4">
+          <div className="form-check d-flex align-items-center gap-2">
+            <input
+              type="checkbox"
+              role="switch"
+              id="checkBoxGeneratePass"
+              className="form-check-input"
+              checked={toGenPass}
+              onChange={handleToggleGenPass}
+            />
+            <label 
+              htmlFor="checkBoxGeneratePass" 
+              className="form-check-label mb-0"
+            >
+              Wygeneruj hasło
+            </label>
+            {toGenPass &&
+              <button
+              type="button"
+              className="btn btn-primary m-2 d-block text-start"
+              onClick={() => generatePassword()}
+              >
+                Wygeneruj hasło
+              </button>
+            }
+          </div>
+        {toGenPass && generatedPass &&
+        <div
+        className="d-block text-start"
+        >
+          <p>Podgląd hasła: {generatedPass}</p>
+          <button
+              type="button"
+              className="btn btn-primary m-2 d-block text-start"
+              onClick={() => toPassField()}
+              >
+                Zastosuj hasło
+              </button>
+        </div>
+        }
+        </div>
+        <div className="form-group m-4">
+          <label 
+          htmlFor="inputPass"
+          className="form-label d-block text-start"
+          >
+            Hasło
+          </label>
+          <input 
+            name="inputPass"
+            type={passSeen ? "text" : "password"}
+            className="form-control" 
+            id="inputPass" 
+            value={passInputValue}
+            disabled={toGenPass}
+            onChange={(e) => setPassInputValue(e.target.value)}
+          />
+        </div>
+        <div className="d-flex justify-content-start gap-2 my-4">
+          <button 
+          type="submit" 
+          className="btn btn-primary m-2"
+          >
+            Zapisz
+          </button>
+          <button 
+          type="button" 
+          className="btn btn-primary m-2"
+          onClick={() => setPassSeen(!passSeen)}
+          >
+            {passSeen ? "Ukryj hasło" : "Pokaż hasło"}
+          </button>
+        </div>
+      </form>
     </div>
-    
-  );
+    <div className="sectionTwo">
+      <p
+      className="m-4 parOne p-2 text-primary lead d-block text-start"
+      >
+        Adres: {email}
+      </p>
+      <p
+      className="m-4 parTwo p-2 d-block text-start"
+      >
+        Login: {login}
+      </p>
+      <p
+      className="m-4 parThree p-2 d-block text-start"
+      >
+        Hasło: {pass}
+      </p>
+    </div>
+    </>
+  )
 }
 
-export default App;
+export default App
